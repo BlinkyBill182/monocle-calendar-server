@@ -7,7 +7,7 @@
 
 ### Available Scripts
 
-In the project directory, you can run:
+In `app` directory, you can run:
 
 ### `uvicorn main:app --reload`
 
