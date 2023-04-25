@@ -3,7 +3,7 @@
 ### Presequence
 - Run MySql
 - With those defaults config:
-![img.png](img.png)
+![image](https://user-images.githubusercontent.com/12120325/234252670-45729cd0-2c4f-4b62-8231-29cb058cbbe8.png)
 
 ### Available Scripts
 
