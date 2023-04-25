@@ -19,5 +19,5 @@ def get_events(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Event).offset(skip).limit(limit).all()
 
 
-def get_event_by_date_and_time(db: Session, date: datetime, time: datetime):
-    return db.query(models.Event).filter(models.Event.date == date and models.Event.time == time).first()
+def get_event_by_date_and_time(db: Session, title: str):
+    return db.query(models.Event).filter(models.Event.title == title).first()

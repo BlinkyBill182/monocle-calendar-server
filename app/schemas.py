@@ -5,14 +5,17 @@ from pydantic import BaseModel
 
 
 class EventBase(BaseModel):
+    id: int
     title: str
     date: str
     time: str
     # repeat_in_days: Union[List[int], None]
 
 
-class EventCreate(EventBase):
-    pass
+class EventCreate(BaseModel):
+    title: str
+    date: str
+    time: str
 
 
 class Event(EventBase):

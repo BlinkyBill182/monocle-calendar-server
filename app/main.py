@@ -1,7 +1,7 @@
-import uvicorn
 from typing import List
 
 from fastapi import Depends, FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
 import crud
@@ -13,8 +13,19 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+
+origins = [
+    "http://localhost",
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 # Dependency
@@ -28,7 +39,7 @@ def get_db():
 
 @app.post("/events/", response_model=schemas.Event)
 def create_event(event: schemas.EventCreate, db: Session = Depends(get_db)):
-    db_event = crud.get_event_by_date_and_time(db, date=event.date, time=event.time)
+    db_event = crud.get_event_by_date_and_time(db, title=event.title)
     if db_event:
         raise HTTPException(status_code=400, detail="Already has event")
     return crud.create_event(db=db, event=event)
